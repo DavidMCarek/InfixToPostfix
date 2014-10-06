@@ -6,12 +6,10 @@ public class EvaluatePostfixExpression
 	
 	static Stack<Integer> valuesStack = new Stack();
 	
-	static String postfixString = Conversion.postfixExpression;
-	
-	static String [] postfixStringArray = postfixString.split(" ");
-	
 	public static int evaluateTheExpression() throws StackUnderflowException
 	{
+		String postfixString = Conversion.postfixExpression;
+		String [] postfixStringArray = postfixString.split(" ");
 		int evaluatedExpression;
 		for (int postfixPlaceCounter = 0; postfixPlaceCounter < postfixStringArray.length; postfixPlaceCounter++)
 		{
