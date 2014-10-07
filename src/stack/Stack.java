@@ -4,12 +4,12 @@ public class Stack<T>
 {
 	Node<T> startOfList = new Node<T>();
 	
-	public Stack()
+	protected Stack()
 	{
 		startOfList.setLink(null);
 	}
 	
-	public boolean listIsEmpty()
+	protected boolean listIsEmpty()
 	{
 		if (startOfList.getLink() == null)
 			return true;
@@ -17,7 +17,7 @@ public class Stack<T>
 		return false;
 	}
 	
-	public void push(T information)
+	protected void push(T information)
 	{
 		Node<T> newNode = new Node<T>();
 		newNode.setInfo(information);
@@ -26,7 +26,7 @@ public class Stack<T>
 		startOfList = newNode;
 	}
 	
-	public void pop() throws StackUnderflowException
+	protected void pop() throws StackUnderflowException
 	{
 		
 		if (listIsEmpty())
@@ -35,7 +35,7 @@ public class Stack<T>
 			startOfList = startOfList.getLink();
 	}
 	
-	public T top() throws StackUnderflowException
+	protected T top() throws StackUnderflowException
 	{
 		if (listIsEmpty())
 			throw new StackUnderflowException("Node not present to check");

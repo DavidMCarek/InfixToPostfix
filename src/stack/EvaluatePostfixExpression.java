@@ -2,112 +2,130 @@ package stack;
 
 public class EvaluatePostfixExpression
 {
-	public final static int TOTAL_NUMBER_OF_OPERATORS = 10;
-	
-	static Stack<Integer> valuesStack = new Stack();
-	
-	public static int evaluateTheExpression() throws StackUnderflowException
+	protected EvaluatePostfixExpression()
 	{
-		String postfixString = Conversion.postfixExpression;
+		
+	}
+	
+	Stack<Long> valuesStack = new Stack();
+	
+	public boolean arithmeticOverflow;
+	
+	long evaluatedExpression;
+	
+	protected void evaluateTheExpression(String postfixExpression) throws StackUnderflowException
+	{
+		String postfixString = postfixExpression;
 		String [] postfixStringArray = postfixString.split(" ");
-		int evaluatedExpression;
+		
 		for (int postfixPlaceCounter = 0; postfixPlaceCounter < postfixStringArray.length; postfixPlaceCounter++)
 		{
-			
 			if (postfixStringArray[postfixPlaceCounter].equals("Q"))
 			{
 				double firstValue = valuesStack.top();
 				valuesStack.pop();
-				valuesStack.push((int) Math.sqrt(firstValue));
+				valuesStack.push((long) Math.sqrt(firstValue));
 			}
 			
 			else if (postfixStringArray[postfixPlaceCounter].equals("C"))
 			{
 				double firstValue = valuesStack.top();
 				valuesStack.pop();
-				valuesStack.push((int) Math.cbrt(firstValue));
+				valuesStack.push((long) Math.cbrt(firstValue));
 			}
 			else if (postfixStringArray[postfixPlaceCounter].equals("<"))
 			{
-				int secondValue = valuesStack.top();
+				long secondValue = valuesStack.top();
 				valuesStack.pop();
-				int firstValue = valuesStack.top();
+				long firstValue = valuesStack.top();
 				valuesStack.pop();
-				valuesStack.push(firstValue << secondValue);
+				
+				valuesStack.push((long) firstValue << secondValue);
 			}
 			
 			else if (postfixStringArray[postfixPlaceCounter].equals(">"))
 			{
-				int secondValue = valuesStack.top();
+				long secondValue = valuesStack.top();
 				valuesStack.pop();
-				int firstValue = valuesStack.top();
+				long firstValue = valuesStack.top();
 				valuesStack.pop();
-				valuesStack.push(firstValue >> secondValue);
+				valuesStack.push((long) firstValue >> secondValue);
 			}
 			
 			else if (postfixStringArray[postfixPlaceCounter].equals("^"))
 			{
-				int secondValue = valuesStack.top();
+				long secondValue = valuesStack.top();
 				valuesStack.pop();
-				int firstValue = valuesStack.top();
-				valuesStack.pop();
-				valuesStack.push((int) Math.pow(firstValue, secondValue));
+				long firstValue = valuesStack.top();
+				valuesStack.pop();				
+				valuesStack.push((long) Math.pow(firstValue, secondValue));
 			}
 			
 			else if (postfixStringArray[postfixPlaceCounter].equals("*"))
 			{
-				int secondValue = valuesStack.top();
+				long secondValue = valuesStack.top();
 				valuesStack.pop();
-				int firstValue = valuesStack.top();
-				valuesStack.pop();
-				valuesStack.push(firstValue * secondValue);
+				long firstValue = valuesStack.top();
+				valuesStack.pop();				
+				valuesStack.push((long) firstValue * secondValue);
 			}
 			
 			else if (postfixStringArray[postfixPlaceCounter].equals("/"))
 			{
-				int secondValue = valuesStack.top();
+				long secondValue = valuesStack.top();
 				valuesStack.pop();
-				int firstValue = valuesStack.top();
-				valuesStack.pop();
-				valuesStack.push(firstValue / secondValue);
+				long firstValue = valuesStack.top();
+				valuesStack.pop();				
+				valuesStack.push((long) firstValue / secondValue);
 			}
 			
 			else if (postfixStringArray[postfixPlaceCounter].equals("%"))
 			{
-				int secondValue = valuesStack.top();
+				long secondValue = valuesStack.top();
 				valuesStack.pop();
-				int firstValue = valuesStack.top();
-				valuesStack.pop();
-				valuesStack.push(firstValue % secondValue);
+				long firstValue = valuesStack.top();
+				valuesStack.pop();			
+				valuesStack.push((long) firstValue % secondValue);
 			}
 			
 			else if (postfixStringArray[postfixPlaceCounter].equals("+"))
 			{
-				int secondValue = valuesStack.top();
+				long secondValue = valuesStack.top();
 				valuesStack.pop();
-				int firstValue = valuesStack.top();
-				valuesStack.pop();
-				valuesStack.push(firstValue + secondValue);
+				long firstValue = valuesStack.top();
+				valuesStack.pop();			
+				valuesStack.push((long) firstValue + secondValue);
 			}
 			
 			else if (postfixStringArray[postfixPlaceCounter].equals("-"))
 			{
-				int secondValue = valuesStack.top();
+				long secondValue = valuesStack.top();
 				valuesStack.pop();
-				int firstValue = valuesStack.top();
-				valuesStack.pop();
-				valuesStack.push(firstValue - secondValue);
+				long firstValue = valuesStack.top();
+				valuesStack.pop();			
+				valuesStack.push((long) firstValue - secondValue);
 			}
 			
 			else
 			{	
-				valuesStack.push(Integer.parseInt(postfixStringArray[postfixPlaceCounter]));
+				valuesStack.push(Long.parseLong(postfixStringArray[postfixPlaceCounter]));
 			}
 			
 		}
 		evaluatedExpression = valuesStack.top();
+		
+		arithmeticOverflow = false;
+		checkForOverflow();
+		
 		valuesStack.pop();
-		return evaluatedExpression;
 	}
 	
+	protected void checkForOverflow()
+	{
+		if (evaluatedExpression > Integer.MAX_VALUE)
+			arithmeticOverflow = true;
+		
+		else
+			arithmeticOverflow = false;
+	}
 }

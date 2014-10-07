@@ -1,13 +1,13 @@
 package stack;
 
-public class StackUnderflowException extends Exception
+public class StackUnderflowException extends RuntimeException
 {
-	public StackUnderflowException()
+	protected StackUnderflowException()
 	{
 		super();
 	}
 	
-	public StackUnderflowException(String underflowMessage)
+	protected StackUnderflowException(String underflowMessage)
 	{
 		super(underflowMessage);
 	}

@@ -4,29 +4,29 @@ public class Node<T>
 {
 	T value;
 	
-	private Node<T> link;
+	protected Node<T> link;
 	
-	public Node()
+	protected Node()
 	{
 		link = null;
 	}
 	
-	public T getValue()
+	protected T getValue()
 	{
 		return value;
 	}
 	
-	public void setInfo(T information)
+	protected void setInfo(T information)
 	{
 		value = information;
 	}
 	
-	public Node<T> getLink()
+	protected Node<T> getLink()
 	{
 		return link;
 	}
 	
-	public void setLink(Node<T> link)
+	protected void setLink(Node<T> link)
 	{
 		this.link = link;
 	}
