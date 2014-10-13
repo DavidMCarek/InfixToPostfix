@@ -1,33 +1,39 @@
 package stack;
 
+// This class is used to define the object Node, its basic methods and characteristics
+// that will be used in the creation of the linked list with stack implementation.
+// A generic node is used since the node will need to hold chars and longs in two
+// different instances.
+
 public class Node<T>
 {
-	T value;
 	
-	protected Node<T> link;
+	T nodeInformation;
+	
+	protected Node<T> linkToNextNode;
 	
 	protected Node()
 	{
-		link = null;
+		linkToNextNode = null;
 	}
 	
-	protected T getValue()
+	protected T getNodeInfo()
 	{
-		return value;
+		return nodeInformation;
 	}
 	
-	protected void setInfo(T information)
+	protected void setNodeInfo(T newInformation)
 	{
-		value = information;
+		nodeInformation = newInformation;
 	}
 	
-	protected Node<T> getLink()
+	protected Node<T> getNodeLink()
 	{
-		return link;
+		return linkToNextNode;
 	}
 	
-	protected void setLink(Node<T> link)
+	protected void setNodeLink(Node<T> link)
 	{
-		this.link = link;
+		this.linkToNextNode = link;
 	}
 }
